@@ -2265,6 +2265,7 @@ extern "C" {
     )]
     pub fn popen(command: *const c_char, mode: *const c_char) -> *mut ::FILE;
     pub fn uname(buf: *mut ::utsname) -> ::c_int;
+    pub fn vfork() -> ::pid_t;
 }
 
 cfg_if! {
