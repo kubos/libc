@@ -225,15 +225,29 @@ s! {
         __f_spare: [::c_int; 6],
     }
 
+    // This dqblk struct is from Linux Quota Version 1, used by Linux v2.2 or older.
+    // I think we are safe to migrate to Version 2
+    // pub struct dqblk {
+    //     pub dqb_bhardlimit: u32,
+    //     pub dqb_bsoftlimit: u32,
+    //     pub dqb_curblocks: u32,
+    //     pub dqb_ihardlimit: u32,
+    //     pub dqb_isoftlimit: u32,
+    //     pub dqb_curinodes: u32,
+    //     pub dqb_btime: ::time_t,
+    //     pub dqb_itime: ::time_t,
+    // }
+
     pub struct dqblk {
-        pub dqb_bhardlimit: u32,
-        pub dqb_bsoftlimit: u32,
-        pub dqb_curblocks: u32,
-        pub dqb_ihardlimit: u32,
-        pub dqb_isoftlimit: u32,
-        pub dqb_curinodes: u32,
-        pub dqb_btime: ::time_t,
-        pub dqb_itime: ::time_t,
+        pub dqb_bhardlimit: u64,
+        pub dqb_bsoftlimit: u64,
+        pub dqb_curspace: u64,
+        pub dqb_ihardlimit: u64,
+        pub dqb_isoftlimit: u64,
+        pub dqb_curinodes: u64,
+        pub dqb_btime: u64,
+        pub dqb_itime: u64,
+        pub dqb_valid: u32
     }
 
     pub struct signalfd_siginfo {
@@ -871,6 +885,7 @@ pub const MSG_WAITFORONE: ::c_int = 0x10000;
 pub const MSG_CMSG_CLOEXEC: ::c_int = 0x40000000;
 
 pub const SOCK_RAW: ::c_int = 3;
+pub const SOCK_RDM: ::c_int = 4;
 pub const IP_MULTICAST_TTL: ::c_int = 33;
 pub const IP_MULTICAST_LOOP: ::c_int = 34;
 pub const IP_TTL: ::c_int = 2;
